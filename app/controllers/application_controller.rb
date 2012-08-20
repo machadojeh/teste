@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(resource)
-	if User.exists?(:chat_user)
+	if User.exists?(session[:chat_user])
     @user = User.find(session[:chat_user])
     @user.update_attributes(:signed_in => '0')
 	end
