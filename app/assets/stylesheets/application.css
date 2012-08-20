@@ -19,6 +19,10 @@ a {
   overflow: hidden;
 }
 
+#notice {
+  display: none;
+}
+
 #container {
 
   width: 70%;
