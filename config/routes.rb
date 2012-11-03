@@ -1,5 +1,10 @@
 Fakebook::Application.routes.draw do
-  resources :mensagems
+  resources :mensagems do
+      member do
+        get :responder
+      end
+      resources :profile
+  end
 
   root :to => 'home#index'
   get "home/index"

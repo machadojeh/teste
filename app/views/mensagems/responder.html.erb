@@ -1,0 +1,19 @@
+<form action="/mensagems/enviar" method="post">
+
+  <div class="field">
+  	<p>
+    <label>To:</label><br />
+    <label><%= @mensagem.remet %></label>
+    </p>
+    <p>
+    <label>Message:</label><br />
+    <input type="text" size="50" maxlength="50" name="mensagem[mensagem]" />
+    </p>
+    <input type='hidden' name='mensagem[dono]'  value='<%=current_user.profile.full_name%>'>
+    <input type='hidden' name='mensagem[dest]' value='<%=@mensagem.remet%>'>
+    <input type='hidden' name='mensagem[remet]' value='<%=current_user.profile.full_name%>'>
+  </div>
+  <div class="actions">
+    <input type="submit" value="Send"/>
+  </div>
+</form>

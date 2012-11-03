@@ -55,6 +55,29 @@ class MensagemsController < ApplicationController
     @aux.save
   end
 
+  def enviar
+    @mensagem = Mensagem.new(params[:mensagem])
+    @aux = Mensagem.new(dono: @mensagem.dest, remet: @mensagem.remet, dest: @mensagem.dest, mensagem: @mensagem.mensagem)
+    
+    respond_to do |format|
+      if @mensagem.save && @aux.save
+        format.html { redirect_to @mensagem, notice: 'Mensagem was successfully created.' }
+        format.json { render json: @mensagem, status: :created, location: @mensagem }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @mensagem.errors, status: :unprocessable_entity }
+      end
+    end
+    
+    @aux = Mensagem.new(dono: @mensagem.dest, remet: @mensagem.remet, dest: @mensagem.dest, mensagem: @mensagem.mensagem)
+    @aux.save
+  end
+
+  def responder
+    @mensagem = Mensagem.find(params[:id])
+	#redirect_to responder_mensagem_path
+  end
+
   # PUT /mensagems/1
   # PUT /mensagems/1.json
   def update
